@@ -7,7 +7,12 @@ import sqlite3
 root = Tk()
 root.title("Pro Shop Helper")
 root.iconbitmap('bowling.ico')
-root.geometry("1600x1000")
+root.geometry("1600x950")
+#root.configure(bg="lightblue")
+
+myCanvas = Canvas(root, width=1600, height=1000, bg="lightblue", borderwidth=0)
+myCanvas.pack()
+
 
 
 
@@ -330,6 +335,12 @@ def delete():
     conn.close()
     clear_form()
 
+def create_circle(x, y, r, canvasName): #center coordinates, radius
+    x0 = x - r
+    y0 = y - r
+    x1 = x + r
+    y1 = y + r
+    return canvasName.create_oval(x0, y0, x1, y1,width = 5)
 
 def select(e):
     clear_form()
@@ -382,104 +393,108 @@ def select(e):
         ring_size.insert(0, record[33])
 
 #create text box labels and entry
-f_name_label = Label(root, text="First")
+f_name_label = Label(myCanvas, text="First")
 f_name_label.grid(row=0, column=0, pady=(20, 5))
-f_name = Entry(root, width=38)
+f_name = Entry(myCanvas, width=38)
 f_name.grid(row=0, column=1, pady=(20,5), sticky="NSEW")
 
-l_name_label = Label(root, text="Last")
+l_name_label = Label(myCanvas, text="Last")
 l_name_label.grid(row=0, column=2, pady=(20, 5))
-l_name = Entry(root, width=30)
+l_name = Entry(myCanvas, width=30)
 l_name.grid(row=0, column=3, pady=(20, 5), sticky="NSEW")
 
-date_label = Label(root, text="Date")
+date_label = Label(myCanvas, text="Date")
 date_label.grid(row=0, column=4, pady=(20, 5))
-date = Entry(root, width=30)
+date = Entry(myCanvas, width=30)
 date.grid(row=0, column=5, pady=(20, 5), sticky="NSEW")
 
-address_label = Label(root, text="Address")
+address_label = Label(myCanvas, text="Address")
 address_label.grid(row=1, column=0, pady=5)
-address = Entry(root, width=128)
+address = Entry(myCanvas, width=128)
 address.grid(row=1, column=1, columnspan=5, pady=5, sticky="NSEW")
 
-city_label = Label(root, text="City")
+city_label = Label(myCanvas, text="City")
 city_label.grid(row=2, column=0, pady=5)
-city = Entry(root, width=38)
+city = Entry(myCanvas, width=38)
 city.grid(row=2, column=1, pady=5, sticky="NSEW")
 
-state_label = Label(root, text="State")
+state_label = Label(myCanvas, text="State")
 state_label.grid(row=2, column=2, pady=5)
-state = Entry(root, width=30)
+state = Entry(myCanvas, width=30)
 state.grid(row=2, column=3, pady=5, sticky="NSEW")
 
-zipcode_label = Label(root, text="Zipcode")
+zipcode_label = Label(myCanvas, text="Zipcode")
 zipcode_label.grid(row=2, column=4, pady=5)
-zipcode = Entry(root, width=30)
+zipcode = Entry(myCanvas, width=30)
 zipcode.grid(row=2, column=5, pady=5, sticky="NSEW")
 
-email_label = Label(root, text="E-Mail")
+email_label = Label(myCanvas, text="E-Mail")
 email_label.grid(row=3, column=0, pady=5)
-email = Entry(root, width=75)
+email = Entry(myCanvas, width=75)
 email.grid(row=3, column=1, columnspan=3, pady=5, sticky="NSEW")
 
-phone_label = Label(root, text="Phone")
+phone_label = Label(myCanvas, text="Phone")
 phone_label.grid(row=3, column=4, pady=5)
-phone = Entry(root, width=30)
+phone = Entry(myCanvas, width=30)
 phone.grid(row=3, column=5, pady=5, sticky="NSEW")
 
-handedness_label = Label(root, text="Hand")
+handedness_label = Label(myCanvas, text="Hand")
 handedness_label.grid(row=4, column=0, pady=5)
-handedness = Entry(root, width=75)
+handedness = Entry(myCanvas, width=75)
 handedness.grid(row=4, column=1, columnspan=3, pady=5, sticky="NSEW")
 
-num_of_hands_label = Label(root, text="# of Hands")
+num_of_hands_label = Label(myCanvas, text="# of Hands")
 num_of_hands_label.grid(row=4, column=4, pady=5)
-num_of_hands = Entry(root, width=30)
+num_of_hands = Entry(myCanvas, width=30)
 num_of_hands.grid(row=4, column=5, pady=5, sticky="NSEW")
 
-middle_reverse_label = Label(root, text="Reverse")
+middle_reverse_label = Label(myCanvas, text="Reverse")
 middle_reverse_label.grid(row=5, column=0, columnspan=2, pady=5)
-middle_reverse = Entry(root, width=10)
+middle_reverse = Entry(myCanvas, width=10)
 middle_reverse.grid(row=6, column=0, columnspan=2, pady=5)
 
-ring_reverse_label = Label(root, text="Reverse")
+ring_reverse_label = Label(myCanvas, text="Reverse")
 ring_reverse_label.grid(row=5, column=4, columnspan=2, pady=5)
-ring_reverse = Entry(root, width=10)
+ring_reverse = Entry(myCanvas, width=10)
 ring_reverse.grid(row=6, column=4, columnspan=2, pady=5)
 
-middle_outward_label = Label(root, text="Outward")
+middle_outward_label = Label(myCanvas, text="Outward")
 middle_outward_label.grid(row=7, column=0, columnspan=2, pady=5)
-middle_outward = Entry(root, width=10)
+middle_outward = Entry(myCanvas, width=10)
 middle_outward.grid(row=8, column=0, columnspan=2, pady=5)
 
-bridge_label = Label(root, text="Bridge")
+bridge_label = Label(myCanvas, text="Bridge")
 bridge_label.grid(row=7, column=2, columnspan=2, pady=5)
-bridge = Entry(root, width=10)
+bridge = Entry(myCanvas, width=10)
 bridge.grid(row=8, column=2, columnspan=2, pady=5)
 
-ring_outward_label = Label(root, text="Outward")
+create_circle(280, 270, 50, myCanvas)
+create_circle(520, 270, 50, myCanvas)
+create_circle(405, 570, 50, myCanvas)
+
+ring_outward_label = Label(myCanvas, text="Outward")
 ring_outward_label.grid(row=7, column=4, columnspan=2, pady=5)
-ring_outward = Entry(root, width=10)
+ring_outward = Entry(myCanvas, width=10)
 ring_outward.grid(row=8, column=4, columnspan=2, pady=5)
 
-middle_forward_label = Label(root, text="Forward")
+middle_forward_label = Label(myCanvas, text="Forward")
 middle_forward_label.grid(row=9, column=0, columnspan=2, pady=5)
-middle_forward = Entry(root, width=10)
+middle_forward = Entry(myCanvas, width=10)
 middle_forward.grid(row=10, column=0, columnspan=2, pady=5)
 
-ring_forward_label = Label(root, text="Forward")
+ring_forward_label = Label(myCanvas, text="Forward")
 ring_forward_label.grid(row=9, column=4, columnspan=2, pady=5)
-ring_forward = Entry(root, width=10)
+ring_forward = Entry(myCanvas, width=10)
 ring_forward.grid(row=10, column=4, columnspan=2, pady=5)
 
-middle_span_label = Label(root, text="Span")
+middle_span_label = Label(myCanvas, text="Span")
 middle_span_label.grid(row=11, column=1, columnspan=3, pady=5)
-middle_span = Entry(root, width=10)
+middle_span = Entry(myCanvas, width=10)
 middle_span.grid(row=12, column=1, columnspan=3, pady=(0, 60))
 
-ring_span_label = Label(root, text="Span", anchor=E)
+ring_span_label = Label(myCanvas, text="Span", anchor=E)
 ring_span_label.grid(row=11, column=3, pady=5, columnspan=2, padx=(65, 0))
-ring_span = Entry(root, width=10)
+ring_span = Entry(myCanvas, width=10)
 ring_span.grid(row=12,
                column=3,
                pady=(0, 60),
@@ -488,19 +503,19 @@ ring_span.grid(row=12,
 #ring_span.place(x=478, y=378)
 #ring_span_label.place(x=494, y=354)
 
-thumb_forward_label = Label(root, text="Forward")
+thumb_forward_label = Label(myCanvas, text="Forward")
 thumb_forward_label.grid(row=13, column=2, columnspan=2, pady=5)
-thumb_forward = Entry(root, width=10)
+thumb_forward = Entry(myCanvas, width=10)
 thumb_forward.grid(row=14, column=2, columnspan=2, pady=(0, 30))
 
-thumb_left_label = Label(root, text="Left")
+thumb_left_label = Label(myCanvas, text="Left")
 thumb_left_label.grid(row=15, column=1, columnspan=3, pady=5)
-thumb_left = Entry(root, width=10)
+thumb_left = Entry(myCanvas, width=10)
 thumb_left.grid(row=16, column=1, columnspan=3, pady=(0, 40))
 
-thumb_right_label = Label(root, text="Right")
+thumb_right_label = Label(myCanvas, text="Right")
 thumb_right_label.grid(row=15, column=3, pady=5, columnspan=2, padx=(65, 0))
-thumb_right = Entry(root, width=10)
+thumb_right = Entry(myCanvas, width=10)
 thumb_right.grid(row=16,
                  column=3,
                  pady=(0, 40),
@@ -509,67 +524,67 @@ thumb_right.grid(row=16,
 #thumb_right.place(x=484, y=568)
 #thumb_right_label.place(x=500, y=544)
 
-thumb_reverse_label = Label(root, text="Reverse")
+thumb_reverse_label = Label(myCanvas, text="Reverse")
 thumb_reverse_label.grid(row=17, column=2, columnspan=2, pady=5)
-thumb_reverse = Entry(root, width=10)
+thumb_reverse = Entry(myCanvas, width=10)
 thumb_reverse.grid(row=18, column=2, columnspan=2, pady=(0, 30))
 
-ball_name_label = Label(root, text="Ball Name")
+ball_name_label = Label(myCanvas, text="Ball Name")
 ball_name_label.grid(row=19, column=0, pady=5)
-ball_name = Entry(root, width=38)
+ball_name = Entry(myCanvas, width=38)
 ball_name.grid(row=19, column=1, pady=5, sticky="NSEW")
 
-ball_weight_label = Label(root, text="Weight")
+ball_weight_label = Label(myCanvas, text="Weight")
 ball_weight_label.grid(row=19, column=2, pady=5)
-ball_weight = Entry(root, width=20)
+ball_weight = Entry(myCanvas, width=20)
 ball_weight.grid(row=19, column=3, pady=5, sticky="NSEW")
 
-serial_label = Label(root, text="Serial")
+serial_label = Label(myCanvas, text="Serial")
 serial_label.grid(row=19, column=4, pady=5)
-serial = Entry(root, width=30)
+serial = Entry(myCanvas, width=30)
 serial.grid(row=19, column=5, pady=5, sticky="NSEW")
 
-insert_label = Label(root, text="Insert")
+insert_label = Label(myCanvas, text="Insert")
 insert_label.grid(row=20, column=2, pady=5)
-style_label = Label(root, text="Style")
+style_label = Label(myCanvas, text="Style")
 style_label.grid(row=20, column=3, pady=5)
-size_label = Label(root, text="Size")
+size_label = Label(myCanvas, text="Size")
 size_label.grid(row=20, column=4, pady=5)
 
-grip_label = Label(root, text="Grip")
+grip_label = Label(myCanvas, text="Grip")
 grip_label.grid(row=21, column=0, pady=5)
-grip = Entry(root, width=38)
+grip = Entry(myCanvas, width=38)
 grip.grid(row=21, column=1, pady=5, sticky="NSEW")
 
-thumb_label = Label(root, text="Thumb")
+thumb_label = Label(myCanvas, text="Thumb")
 thumb_label.grid(row=21, column=2, pady=5)
-thumb_style = Entry(root, width=20)
+thumb_style = Entry(myCanvas, width=20)
 thumb_style.grid(row=21, column=3, pady=5, sticky="NSEW")
-thumb_size = Entry(root, width=20)
+thumb_size = Entry(myCanvas, width=20)
 thumb_size.grid(row=21, column=4, pady=5, sticky="NSEW")
 
-middle_label = Label(root, text="Middle")
+middle_label = Label(myCanvas, text="Middle")
 middle_label.grid(row=22, column=2, pady=5)
-middle_style = Entry(root, width=20)
+middle_style = Entry(myCanvas, width=20)
 middle_style.grid(row=22, column=3, pady=5, sticky="NSEW")
-middle_size = Entry(root, width=20)
+middle_size = Entry(myCanvas, width=20)
 middle_size.grid(row=22, column=4, pady=5, sticky="NSEW")
 
-ring_label = Label(root, text="Ring")
+ring_label = Label(myCanvas, text="Ring")
 ring_label.grid(row=23, column=2, pady=5)
-ring_style = Entry(root, width=20)
+ring_style = Entry(myCanvas, width=20)
 ring_style.grid(row=23, column=3, pady=5, sticky="NSEW")
-ring_size = Entry(root, width=20)
+ring_size = Entry(myCanvas, width=20)
 ring_size.grid(row=23, column=4, pady=5, sticky="NSEW")
 
-submit_btn = Button(root, text="Add New", command=submit)
+submit_btn = Button(myCanvas, text="Add New", command=submit)
 submit_btn.grid(row=24, column=0, columnspan=2, ipadx=50)
-delete_btn = Button(root, text="Delete", command=delete)
+delete_btn = Button(myCanvas, text="Delete", command=delete)
 delete_btn.grid(row=24, column=3, ipadx=50)
 
-clear_btn = Button(root, text="Clear", command=clear_form)
+clear_btn = Button(myCanvas, text="Clear", command=clear_form)
 clear_btn.grid(row=25, column=3, ipadx=50)
-edit_btn = Button(root, text="Update", command=edit)
+edit_btn = Button(myCanvas, text="Update", command=edit)
 edit_btn.grid(row=25, column=0, columnspan=2, ipadx=50)
 
 
@@ -579,7 +594,7 @@ edit_btn.grid(row=25, column=0, columnspan=2, ipadx=50)
 #s = Style()
 #s.configure('TFrame', borderwidth=5)
 
-table_frame = Frame(root, height=900, width=750, relief=GROOVE, borderwidth=10)
+table_frame = Frame(myCanvas, height=900, width=750, relief=GROOVE, borderwidth=10)
 table_frame.grid_propagate(0)
 table_frame.grid(row=0,column=7,columnspan=5, rowspan=30,pady=(20, 0),padx=(10, 0),sticky=N)
 
@@ -593,6 +608,7 @@ style.configure("Treeview",
 
 style.map('Treeview',
     background=[('selected', "#347083")])
+
 
 tree_scroll = Scrollbar(table_frame)
 tree_scroll.pack(side=RIGHT, fill=Y)
@@ -623,8 +639,8 @@ entry_list = [f_name, l_name, date, address, city, state, zipcode, email, phone,
 
 row_number = 0
 for entry in entry_list:
-    Grid.rowconfigure(root, row_number, weight=1)
-    Grid.columnconfigure(root, row_number, weight=1)
+    Grid.rowconfigure(myCanvas, row_number, weight=1)
+    Grid.columnconfigure(myCanvas, row_number, weight=1)
     row_number+=1
 
 
